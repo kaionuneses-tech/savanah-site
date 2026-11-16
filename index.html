@@ -32,13 +32,13 @@
     }
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@300;400;500&family=Lexend:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="preload" href="assets/fontes/lexend.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <p class="previa" role="note">Versão de demonstração: os empreendimentos, as fotos e o e-mail são exemplos e serão substituídos pelos dados reais.</p>
 
   <header class="topo">
     <div class="topo__inner">
@@ -73,7 +73,8 @@
       </svg>
     </section>
 
-    <section class="areas" aria-label="O que fazemos">
+    <section class="areas" aria-labelledby="t-areas">
+      <h2 id="t-areas" class="sr-only">O que fazemos</h2>
       <ul class="areas__lista">
         <li>
           <img src="assets/icone-lote.png" alt="" width="122" height="52">
@@ -236,17 +237,18 @@
         </dl>
       </div>
       <form class="form" id="form" novalidate>
+        <p class="form__dica" id="dica-contato">Informe seu nome e pelo menos um contato: telefone ou e-mail.</p>
         <div class="campo">
           <label for="nome">Nome</label>
           <input id="nome" name="nome" autocomplete="name" required>
         </div>
         <div class="campo">
           <label for="tel">Telefone</label>
-          <input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required>
+          <input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="dica-contato">
         </div>
         <div class="campo">
           <label for="email">E-mail</label>
-          <input id="email" name="email" type="email" autocomplete="email" required>
+          <input id="email" name="email" type="email" autocomplete="email" aria-describedby="dica-contato">
         </div>
         <div class="campo">
           <label for="interesse">Interesse</label>
@@ -278,6 +280,7 @@
       <a href="#como-construimos">Como construímos</a>
       <a href="#contato">Contato</a>
       <a href="privacidade.html">Política de Privacidade</a>
+      <a href="termos.html">Termos de uso</a>
     </nav>
     <p class="rodape__legal">© 2026 Savanah Empreendimentos Ltda · CNPJ 11.356.055/0001-55 · Rua José Farias, 160, sala 103, Santa Luíza, Vitória, ES, CEP 29045-300. Imagens meramente ilustrativas.</p>
   </footer>

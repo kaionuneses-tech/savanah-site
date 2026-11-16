@@ -11,6 +11,14 @@ menuBtn.addEventListener('click', () => {
   const aberto = nav.classList.toggle('aberto');
   menuBtn.setAttribute('aria-expanded', aberto);
 });
+// Esc fecha o menu e devolve o foco ao botão
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && nav.classList.contains('aberto')) {
+    nav.classList.remove('aberto');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.focus();
+  }
+});
 nav.addEventListener('click', e => {
   if (e.target.closest('a')) { nav.classList.remove('aberto'); menuBtn.setAttribute('aria-expanded', 'false'); }
 });
@@ -43,12 +51,22 @@ const form = document.getElementById('form');
 const status = form.querySelector('.form__status');
 form.addEventListener('submit', e => {
   e.preventDefault();
-  const invalidos = [...form.querySelectorAll('[required]')].filter(c => !c.checkValidity());
-  form.querySelectorAll('[required]').forEach(c => c.setAttribute('aria-invalid', !c.checkValidity()));
-  if (invalidos.length) {
+  // Nome obrigatório; basta um contato (telefone ou e-mail), e o e-mail, se preenchido, precisa ser válido
+  const nome = form.nome, tel = form.tel, email = form.email;
+  const semContato = !tel.value.trim() && !email.value.trim();
+  const erros = [
+    [nome, !nome.value.trim()],
+    [tel, semContato],
+    [email, semContato || !email.checkValidity()],
+  ];
+  erros.forEach(([campo, ruim]) => campo.setAttribute('aria-invalid', ruim));
+  const primeiro = erros.find(([, ruim]) => ruim);
+  if (primeiro) {
     status.className = 'form__status erro';
-    status.textContent = 'Preencha nome, telefone e um e-mail válido para enviarmos sua mensagem.';
-    invalidos[0].focus();
+    status.textContent = !nome.value.trim() ? 'Preencha seu nome para enviarmos sua mensagem.'
+      : semContato ? 'Informe um telefone ou um e-mail para retornarmos o contato.'
+      : 'Confira o e-mail: ele parece incompleto.';
+    primeiro[0].focus();
     return;
   }
   const d = new FormData(form);

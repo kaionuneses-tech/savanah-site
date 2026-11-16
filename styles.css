@@ -1,10 +1,14 @@
+@font-face { font-family: "Lexend"; src: url("assets/fontes/lexend.woff2") format("woff2"); font-weight: 300 500; font-display: swap; }
+@font-face { font-family: "Lexend Exa"; src: url("assets/fontes/lexend-exa.woff2") format("woff2"); font-weight: 300 500; font-display: swap; }
+
 :root {
   --calcario: #F2F2F0;
   --branco: #FFFFFF;
   --nanquim: #000;
   --texto: #2B2B2B;
   --pedra: #6E6E6A;
-  --linha: #D8D8D4;
+  --linha: #D8D8D4; /* só linhas decorativas */
+  --borda: #8A8A86; /* bordas de campos e botões: contraste mínimo 3:1 */
   --savanah: #B80F14; /* vermelho da logo */
   --savanah-escuro: #8E0B0F;
 
@@ -111,7 +115,7 @@ a { color: inherit; }
 .filtros { display: flex; gap: 6px; flex-wrap: wrap; }
 .filtros button {
   font: 400 0.9rem/1 var(--corpo); padding: 10px 16px; cursor: pointer;
-  background: transparent; color: var(--texto); border: 1px solid var(--linha); border-radius: 40px;
+  background: transparent; color: var(--texto); border: 1px solid var(--borda); border-radius: 40px;
 }
 .filtros button:hover { border-color: var(--savanah); }
 .filtros button[aria-pressed="true"] { background: var(--nanquim); color: #fff; border-color: var(--nanquim); }
@@ -129,7 +133,7 @@ a { color: inherit; }
 .fase { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; margin-bottom: 14px; }
 .fase::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 .fase--lancamento { color: var(--savanah); }
-.fase--obras { color: #8A6D1F; }
+.fase--obras { color: #7A5F14; }
 .fase--entregue { color: var(--pedra); }
 
 .ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 28px 0 32px; border-top: 1px solid var(--linha); }
@@ -211,7 +215,7 @@ a { color: inherit; }
 .opcional { color: var(--pedra); font-weight: 300; }
 .campo input, .campo select, .campo textarea {
   font: 300 1rem/1.5 var(--corpo); color: var(--nanquim);
-  background: var(--branco); border: 1px solid var(--linha); border-radius: 2px;
+  background: var(--branco); border: 1px solid var(--borda); border-radius: 2px;
   padding: 12px 14px; width: 100%;
 }
 .campo textarea { resize: vertical; }
@@ -239,7 +243,7 @@ a { color: inherit; }
 @media (max-width: 960px) {
   .menu-btn {
     display: block; font: 400 0.95rem/1 var(--corpo); padding: 10px 16px;
-    background: transparent; border: 1px solid var(--linha); border-radius: 40px; color: var(--nanquim); cursor: pointer;
+    background: transparent; border: 1px solid var(--borda); border-radius: 40px; color: var(--nanquim); cursor: pointer;
   }
   .nav {
     display: none; position: absolute; top: 100%; left: 0; right: 0;
@@ -304,3 +308,9 @@ a { color: inherit; }
 .legal h2 { font-size: 1.25rem; margin: 36px 0 10px; }
 .legal__data { color: var(--pedra); font-size: 0.9rem; margin-top: 40px; }
 .rodape img { mix-blend-mode: multiply; } /* some o branco levemente diferente da imagem da logo */
+
+/* Aviso de prévia, título só para leitores de tela, dica do formulário */
+.previa { margin: 0; max-width: none; padding: 8px var(--gutter); background: var(--nanquim); color: #fff; font-size: 0.85rem; line-height: 1.4; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.form__dica { grid-column: 1 / -1; margin: 0; font-size: 0.9rem; color: var(--pedra); }
+.legal ul { padding-left: 1.2em; margin: 0 0 1em; }
